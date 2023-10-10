@@ -54,14 +54,15 @@ def list_tasks(_tasks):
 def add_task(name: str, description: str, due: str):
     """ Copies the TASK_TEMPLATE and fills in the passed in data then adds the task to the tasks list """
     task = TASK_TEMPLATE.copy() # don't delete this; use this task reference for the below requirements
-    # update lastActivity with the current datetime value
+    # update lastActivity with the current datetime value  
     # set the name, description, and due date (all must be provided)
     # due date must match one of the formats mentioned in str_to_datetime()
     # add the new task to the tasks list
     # output a message confirming the new task was added or if the addition was rejected due to missing data based on the prior checks
     # make sure save() is still called last in this function
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
     # make sure any checks/conditions clearly display an appropriate message of what failed
+    #nm779 10/07/23 This function appears to add a new task to a list called 'tasks' with attributes like name, description, due date, and last activity timestamp. It then attempts to save the updated list and prints a success message or an error message if an exception occurs during the process.
     try:
         task['lastActivity'] = datetime.now()
         task['name'] = name
@@ -78,7 +79,8 @@ def process_update(index):
     # get the task by index
     # consider index out of bounds scenarios and include appropriate message(s) for invalid index
     # show the existing value of each property where the TODOs are marked in the text of the inputs below (replace the TODO related text with the found tasks's data)
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/08/23 This code attempts to update a task's name, description, and due date using user input. It prompts the user for these details based on the task at a specified index in a list of tasks. If the index is invalid (out of range), it informs the user to enter a valid number.
     try:
         task = tasks[index]
         name = input(f"What's the name of this task? {task['name']} \n").strip()
@@ -96,7 +98,8 @@ def update_task(index: int, name: str, description:str, due: str):
     # update lastActivity with the current datetime value
     # output that the task was updated if any items were changed, otherwise mention task was not updated
     # make sure save() is still called last in this function
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/08/23 This function updates a task in a list called 'tasks' based on input parameters like 'name,' 'description,' and 'due' date. It checks if any of these parameters differ from the task's current values, updates them if necessary, and records the last activity timestamp. Finally, it prints a success message if changes were made and saves the updated task list.
     task = tasks[index]
     task['lastActivity'] = datetime.now()
     x = False
@@ -127,7 +130,8 @@ def mark_done(index):
     # if it's not currently marked as done, record the current datetime as the value (don't just set it as true)
     # if it is currently done, print a message saying it's already been completed
     # make sure save() is still called last in this function
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/08/23 This function marks a task as completed by updating its 'done' field with the current datetime if the task exists and is not already marked as done. It catches an IndexError if the task index is out of bounds and then saves the updated task list to storage.
     try:
         task = tasks[index]
         if task['done']==False:
@@ -144,7 +148,7 @@ def view_task(index):
     # find task from list by index
     # consider index out of bounds scenarios and include appropriate message(s) for invalid index
     # utilize the given print statement when a task is found
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution nm779 10/09/23
     task = tasks[index] # <-- replace or update the assignment of this variable, I just used an empty dict so it would run without changes
     print(f"""
         [{'x' if task['done'] else ' '}] Task: {task['name']}\n 
@@ -161,7 +165,8 @@ def delete_task(index):
     # message should show if it was successful or not
     # consider index out of bounds scenarios and include appropriate message(s) for invalid index
     # make sure save() is still called last in this function
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/09/23 This function, given a list of tasks, filters and selects tasks that have a due date earlier than the current time. It uses the current time, compares it to each task's due date, and appends eligible tasks to the `_tasks` list. Finally, it calls the `list_tasks` function to display the filtered tasks.
     try:
         del tasks[index]
         print("task deleted successfully")
@@ -173,7 +178,8 @@ def get_incomplete_tasks():
     """ prints a list of tasks that are not done """
     # generate a list of tasks where the task is not done
     # pass that list into list_tasks()
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/09/23 This function filters a list of tasks, retaining only those with a 'done' key set to False. It then calls the 'list_tasks' function to display the filtered tasks. Essentially, it displays incomplete tasks from the input list of tasks.
     _tasks = [] # <-- this is a placeholder to populate based on the above requirements
     for task in tasks:
         if task['done']==False:
@@ -184,11 +190,12 @@ def get_overdue_tasks():
     """ prints a list of tasks that are over due completion (not done and expired) """
     # generate a list of tasks where the due date is older than "now" and that are not complete (i.e., not done)
     # pass that list into list_tasks()
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/09/23 This function creates an empty list called "_tasks" and retrieves the current date and time. It then iterates through a list of tasks, filtering and appending tasks with due dates earlier than the current time to "_tasks." Finally, it calls a "list_tasks" function to display the filtered tasks.
     _tasks = [] # <-- this is a placeholder to populate based on the above requirements
     now = str_to_datetime(str(datetime.now()).split('.')[0])
     for task in tasks:
-        if task['due']<now:
+        if task['due'] < now:
             _tasks.append(task)
     list_tasks(_tasks)
 
@@ -201,7 +208,8 @@ def get_time_remaining(index):
     # example: 1 day, 0 hours, 0 minutes, 0 seconds remaining
     # if the due date is in the past print out how many days, hours, minutes, seconds the task is overdue (clearly note that it's overdue, values should be positive)
     # example: 0 days, 2 hours, 5 minutes, 10 seconds overdue (note there's no negative values)
-    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution
+    # include your ucid and date as a comment of when you implemented this, briefly summarize the solution 
+    # nm779 10/09/23 This function checks the status of a task at a given 'index' in a list of tasks. It calculates the time remaining or overdue for the task's 'due' date compared to the current time and prints the result. If the task is already completed or the index is out of range, it handles the exceptions.
     try:
         task = tasks[index]# <-- this is a placeholder to populate based on the above requirements
         if task['done']==False:
