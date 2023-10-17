@@ -78,19 +78,19 @@ class MyCalc:
         
     def add(self, num):
         self.ans += num
-        
+        /nm779 10/16 this func adds the equation
     def subtract(self, num):
         self.ans -= num
-        
+        /nm779 10/16 this func subtracts the equation
     def multiply(self, num):
         self.ans *= num
-        
+        /nm779 10/16 this func multiplies the equation
     def divide(self, num):
         if num == 0:
             print("Error: cannot divide by zero")
         else:
             self.ans /= num
-        
+        /nm779 10/16 this func divides the equation and prints error if divided by 0
     def main(self):
         while True:
             user_input = input("Enter a math expression (or 'exit' to quit): ")
